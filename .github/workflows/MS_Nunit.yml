@@ -49,7 +49,7 @@ jobs:
         run: dotnet new nunit
       
       - name: add package Microsoft.NET.Test.Sdk
-        run: dotnet add unit-testing-using-nunit.csproj package Microsoft.NET.Test.Sdk --version 16.10.0 
+        run: dotnet add /MS-and-Nunit/unit-testing-using-nunit.csproj package Microsoft.NET.Test.Sdk --version 16.10.0 
       
       - name: add package Nunit3TestAdapter
         run: dotnet add unit-testing-using-nunit.csproj package Nunit3TestAdapter
