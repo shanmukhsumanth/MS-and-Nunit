@@ -40,18 +40,24 @@ jobs:
       run: msbuild /m /t:Rebuild ${{env.SOLUTION_FILE_PATH}}
       continue-on-error: ${{ env.CONTINUE_ON_ERROR }}
       
-    - name: NUnit
-      run: dotnet new nunit
+  tests:
+    needs: build
+    name: NUnit Testing
+    runs-on: windows-latest
+    steps: 
+      - uses: actions/checkout@v2
+      - name: NUnit
+        run: dotnet new nunit
       
-    - name: add package Microsoft.NET.Test.Sdk
-      run: dotnet add unit-testing-using-nunit.csproj package Microsoft.NET.Test.Sdk --version 16.10.0 
+      - name: add package Microsoft.NET.Test.Sdk
+        run: dotnet add unit-testing-using-nunit.csproj package Microsoft.NET.Test.Sdk --version 16.10.0 
       
-    - name: add package Nunit3TestAdapter
-      run: dotnet add unit-testing-using-nunit.csproj package Nunit3TestAdapter
+      - name: add package Nunit3TestAdapter
+        run: dotnet add unit-testing-using-nunit.csproj package Nunit3TestAdapter
       
-    - name: add package NUnit
-      run: dotnet add unit-testing-using-nunit.csproj package NUnit
+      - name: add package NUnit
+        run: dotnet add unit-testing-using-nunit.csproj package NUnit
       
-    - name: Nunit Test
-      run: dotnet test unit-testing-using-nunit.sln
+      - name: Nunit Test
+        run: dotnet test unit-testing-using-nunit.sln
    
