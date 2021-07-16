@@ -59,7 +59,8 @@ jobs:
       - name: add package Nunit3Console runner
         run: dotnet add unit-testing-using-nunit.csproj package NUnit.ConsoleRunner --version 3.12.0
         
-        
+      - name: Install Nunit console 
+        run: dotnet tool install --global NUnit.ConsoleRunner.NetCore --version 3.12.0-beta2
       
       - name: add package NUnit
         run: dotnet add unit-testing-using-nunit.csproj package NUnit
