@@ -53,20 +53,28 @@ jobs:
       - name: add package Microsoft.NET.Test.Sdk
         run: dotnet add unit-testing-using-nunit.csproj package Microsoft.NET.Test.Sdk --version 16.10.0 
       
-      #- name: add package Nunit3TestAdapter
-       # run: dotnet add unit-testing-using-nunit.csproj package Nunit3TestAdapter
+      - name: add package Nunit3TestAdapter
+        run: dotnet add unit-testing-using-nunit.csproj package Nunit3TestAdapter
         
-      - name: add package Nunit3Console runner
-        run: dotnet add unit-testing-using-nunit.csproj package NUnit.ConsoleRunner --version 3.12.0
+      #- name: add package Nunit3Console runner
+       # run: dotnet add unit-testing-using-nunit.csproj package NUnit.ConsoleRunner --version 3.12.0
         
-      - name: Install Nunit console 
-        run: dotnet tool install --global NUnit.ConsoleRunner.NetCore --version 3.12.0-beta2
+      #- name: Install Nunit console 
+       # run: dotnet tool install --global NUnit.ConsoleRunner.NetCore --version 3.12.0-beta2
       
       - name: add package NUnit
         run: dotnet add unit-testing-using-nunit.csproj package NUnit
+        
+      - name: add test logger package 
+        run: dotnet add unit-testing-using-nunit.csproj package NunitXml.TestLogger --version 3.0.107
       
       - name: Nunit Test
-        run: dotnet test nunit-console unit-testing-using-nunit.csproj 
+        run: dotnet test unit-testing-using-nunit.sln --logger:"trx;LogFileName=testresult.xml"
+        
+      - name: Publish Unit Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v1
+        if: always()
+        with:
+          files: target/surefire-reports/*.xml
       
       
-   
