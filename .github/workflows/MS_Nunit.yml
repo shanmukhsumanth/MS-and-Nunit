@@ -65,7 +65,7 @@ jobs:
         run: dotnet add unit-testing-using-nunit.csproj package NUnit
       
       - name: Nunit Test
-        run: dotnet test unit-testing-using-nunit.sln /p:CollectCoverage=true /p:DeterministicSourcePaths=true /p:IncludeTestAssembly=true /p:CoverletOutputFormat=opencover%2ccobertura /p:CoverletOutput=../
+        run: nunit-console unit-testing-using-nunit.csproj 
       
       
    
