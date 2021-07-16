@@ -84,5 +84,19 @@ jobs:
           # Artifact name
          name: artifact 
          path: D:\a\MS-and-Nunit\MS-and-Nunit\PrimeService.Tests\TestResults\testresult.xml
+      - name: ReportGenerator
+        uses: danielpalme/ReportGenerator-GitHub-Action@4.8.9
+        with:
+          reports: 'D:\a\MS-and-Nunit\MS-and-Nunit\PrimeService.Tests\TestResults\testresult.xml'
+          targetdir: './'
+          reporttypes: 'HtmlInline_AzurePipelines;Cobertura;Badges'
+          #sourcedirs: 'unit-testing-using-nunit.csproj'
+          assemblyfilters: '-xunit*'
+        
+      - name: 'Publish code coverage results'
+        uses: actions/upload-artifact@v2.2.3
+        with:
+          name: CoverageReport
+          path: D:\a\MS-and-Nunit\MS-and-Nunit\PrimeService.Tests\TestResults 
 
       
