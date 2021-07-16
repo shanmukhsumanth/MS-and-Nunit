@@ -91,7 +91,7 @@ jobs:
           targetdir: './'
           reporttypes: 'HtmlInline_AzurePipelines;Cobertura;Badges'
           #sourcedirs: 'unit-testing-using-nunit.csproj'
-          assemblyfilters: '-xunit*'
+          assemblyfilters: '-nunit*'
         
       - name: 'Publish code coverage results'
         uses: actions/upload-artifact@v2.2.3
