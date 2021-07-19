@@ -75,8 +75,11 @@ jobs:
       - name: add test logger package 
         run: dotnet add unit-testing-using-nunit.csproj package NunitXml.TestLogger --version 3.0.107
       
+      - name: add package NUnit
+        run: dotnet add unit-testing-using-nunit.csproj package TeamCity.dotcover
+      
       - name: Nunit Test
-        run: dotnet test unit-testing-using-nunit.sln --logger:"trx;LogFileName=testresult.xml"
+        run: dotnet dotcover test unit-testing-using-nunit.sln --logger:"trx;LogFileName=testresult.xml"
         
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.2.4
@@ -84,14 +87,7 @@ jobs:
           # Artifact name
          name: artifact 
          path: D:\a\MS-and-Nunit\MS-and-Nunit\PrimeService.Tests\TestResults\testresult.xml
-      - name: ReportGenerator
-        uses: danielpalme/ReportGenerator-GitHub-Action@4.8.9
-        with:
-          reports: 'D:\a\MS-and-Nunit\MS-and-Nunit\PrimeService.Tests\TestResults\testresult.xml'
-          targetdir: './'
-          reporttypes: 'HtmlInline_AzurePipelines;Cobertura;Badges'
-          #sourcedirs: 'unit-testing-using-nunit.csproj'
-          assemblyfilters: '-nunit*'
+      
         
       - name: 'Publish code coverage results'
         uses: actions/upload-artifact@v2.2.3
