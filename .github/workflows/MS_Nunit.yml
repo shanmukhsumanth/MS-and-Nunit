@@ -99,7 +99,7 @@ jobs:
         run : dotnet add unit-testing-using-nunit.csproj package JetBrains.dotCover.CommandLineTools --version 2021.1.4
         
       - name: Run dot cover 
-        run : dotCover.sh dotnet --output=./CodeCoverageReport.xml --reportType=XML -- test "./unit-testing-using-nunit1.csproj"
+        run : dotnet --output=./CodeCoverageReport.xml --reportType=XML -- test "./unit-testing-using-nunit1.csproj"
         
       - name: 'Publish code coverage results'
         uses: actions/upload-artifact@v2.2.3
