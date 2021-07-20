@@ -79,7 +79,7 @@ jobs:
         run: dotnet add unit-testing-using-nunit.csproj package TeamCity.dotcover
       
       - name: Nunit Test
-        run: dotnet dotcover test unit-testing-using-nunit.sln --logger:"trx;LogFileName=testresult.xml"
+        run: dotnet test unit-testing-using-nunit.sln --logger:"trx;LogFileName=testresult.xml"
         
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.2.4
@@ -87,6 +87,13 @@ jobs:
           # Artifact name
          name: artifact 
          path: D:\a\MS-and-Nunit\MS-and-Nunit\PrimeService.Tests\TestResults\testresult.xml
+         
+         
+      - name: dotnet cover  
+        uses: dodopizza/dotcover-action@v1
+        with:
+         #dotCoverCommand: help cover coverage.xml
+          dotCoverCommand: dotnet --output=AppCoverageReport.html --reportType=HTML -- test "./unit-testing-using-nunit.csproj"
       
         
       - name: 'Publish code coverage results'
