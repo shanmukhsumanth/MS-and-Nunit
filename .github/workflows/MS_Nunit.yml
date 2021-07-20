@@ -75,8 +75,8 @@ jobs:
       - name: add test logger package 
         run: dotnet add unit-testing-using-nunit.csproj package NunitXml.TestLogger --version 3.0.107
       
-      - name: add package NUnit
-        run: dotnet add unit-testing-using-nunit.csproj package TeamCity.dotcover
+      #- name: add package NUnit
+       # run: dotnet add unit-testing-using-nunit.csproj package TeamCity.dotcover
       
       - name: Nunit Test
         run: dotnet test unit-testing-using-nunit.sln --logger:"trx;LogFileName=testresult.xml"
@@ -96,7 +96,7 @@ jobs:
          # dotCoverCommand: dotnet --output=AppCoverageReport.html --reportType=HTML -- test "./unit-testing-using-nunit.csproj"
       
       - name: install dotcover 
-        run : dotnet add package JetBrains.dotCover.CommandLineTools --version 2021.1.4
+        run : dotnet add unit-testing-using-nunit.csproj package JetBrains.dotCover.CommandLineTools --version 2021.1.4
         
       - name: 'Publish code coverage results'
         uses: actions/upload-artifact@v2.2.3
