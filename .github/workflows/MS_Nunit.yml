@@ -89,12 +89,14 @@ jobs:
          path: D:\a\MS-and-Nunit\MS-and-Nunit\PrimeService.Tests\TestResults\testresult.xml
          
          
-      - name: dotnet cover  
-        uses: dodopizza/dotcover-action@v1
-        with:
+      #- name: dotnet cover  
+       # uses: dodopizza/dotcover-action@v1
+        #with:
          #dotCoverCommand: help cover coverage.xml
-          dotCoverCommand: dotnet --output=AppCoverageReport.html --reportType=HTML -- test "./unit-testing-using-nunit.csproj"
+         # dotCoverCommand: dotnet --output=AppCoverageReport.html --reportType=HTML -- test "./unit-testing-using-nunit.csproj"
       
+      - name: install dotcover 
+        run : dotnet add package JetBrains.dotCover.CommandLineTools --version 2021.1.4
         
       - name: 'Publish code coverage results'
         uses: actions/upload-artifact@v2.2.3
