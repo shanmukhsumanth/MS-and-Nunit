@@ -88,23 +88,25 @@ jobs:
          name: artifact 
          path: D:\a\MS-and-Nunit\MS-and-Nunit\PrimeService.Tests\TestResults\testresult.xml
          
-         
-      #- name: dotnet cover  
-       # uses: dodopizza/dotcover-action@v1
-        #with:
-         #dotCoverCommand: help cover coverage.xml
-         # dotCoverCommand: dotnet --output=AppCoverageReport.html --reportType=HTML -- test "./unit-testing-using-nunit.csproj"
+  Code-Quality-Check:
+    needs: tests
+    name: Dotcover 
+    runs-on: ubuntu-latest
+    steps: 
+      - uses: actions/checkout@v2
       
-      - name: install dotcover 
-        run : dotnet add unit-testing-using-nunit.csproj package JetBrains.dotCover.CommandLineTools --version 2021.1.4
-        
-      - name: Run dot cover 
-        run : dotnet cover --output=./CodeCoverageReport.xml --reportType=XML -- test "./unit-testing-using-nunit1.csproj"
-        
+      - name: dotnet cover  
+        uses: dodopizza/dotcover-action@v1
+        with:
+         #dotCoverCommand: help cover coverage.xml
+         dotCoverCommand: dotnet --output=./CodeCoverageReport.xml --reportType=XML -- test "./unit-testing-using-nunit.csproj"
+
       - name: 'Publish code coverage results'
         uses: actions/upload-artifact@v2.2.3
         with:
           name: CoverageReport
-          path: D:\a\MS-and-Nunit\MS-and-Nunit\PrimeService.Tests\TestResults 
-
-      
+          path: ./CodeCoverageReport.xml 
+    
+    
+  
+    
